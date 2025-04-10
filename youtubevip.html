@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook - Đăng nhập hoặc đăng ký</title>
+  <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .left {
+      flex: 1;
+      padding-left: 60px;
+    }
+    .left h1 {
+      color: #1877f2;
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+    .left p {
+      font-size: 24px;
+      line-height: 32px;
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .login-box {
+      background-color: #fff;
+      padding: 20px 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 380px;
+      z-index: 1;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 14px;
+      margin: 6px 0;
+      font-size: 17px;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+    }
+    .login-box input.invalid {
+      border-color: red;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      background-color: #1877f2;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background-color: #166fe5;
+    }
+    .login-box a {
+      display: block;
+      text-align: center;
+      margin-top: 14px;
+      color: #1877f2;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .login-box a:hover {
+      text-decoration: underline;
+    }
+    .divider {
+      height: 1px;
+      background-color: #dadde1;
+      margin: 20px 0;
+    }
+    .create-btn {
+      background-color: #42b72a;
+      margin: auto;
+      display: block;
+      width: 60%;
+    }
+    .create-btn:hover {
+      background-color: #36a420;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: #737373;
+    }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+    .popup {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      width: 400px;
+      max-width: 90%;
+      animation: slideUp 0.5s ease;
+    }
+    .popup h2 {
+      margin-bottom: 20px;
+      color: #1c1e21;
+    }
+    .popup input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .popup .actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+    .popup .actions button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .popup .cancel {
+      background-color: #e4e6eb;
+    }
+    .popup .submit {
+      background-color: #42b72a;
+      color: #fff;
+    }
+    .message {
+      text-align: center;
+      color: green;
+      margin-top: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+      }
+      .left, .right {
+        flex: unset;
+        width: 100%;
+        padding: 0;
+      }
+      .left {
+        margin-bottom: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <a href="/" style="text-decoration: none;">
+        <h1>facebook</h1>
+      </a>
+      <p>Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.</p>
+    </div>
+    <div class="right">
+      <div class="login-box">
+        <input id="login-email" type="text" placeholder="Email hoặc số điện thoại" />
+        <input id="login-pass" type="password" placeholder="Mật khẩu" />
+        <button onclick="fakeLogin()">Đăng nhập</button>
+        <a href="#">Quên mật khẩu?</a>
+        <div class="divider"></div>
+        <button class="create-btn" onclick="showPopup()">Tạo tài khoản mới</button>
+        <p id="login-msg" class="message"></p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>Tiếng Việt · English (UK) · 中文(简体) · 한국어 · 日本語 · Français (France)</p>
+    <p>© 2025 Fake Facebook</p>
+  </div>
+  <div class="popup-overlay" onclick="hidePopup(event)">
+    <div class="popup" onclick="event.stopPropagation()">
+      <h2>Đăng ký</h2>
+      <input id="signup-name" type="text" placeholder="Họ tên" />
+      <input id="signup-email" type="text" placeholder="Email hoặc số điện thoại" />
+      <input id="signup-pass" type="password" placeholder="Mật khẩu mới" />
+      <div class="actions">
+        <button class="cancel" onclick="hidePopup()">Hủy</button>
+        <button class="submit" onclick="fakeSignup()">Đăng ký</button>
+      </div>
+      <p id="signup-msg" class="message"></p>
+    </div>
+  </div>
+  <script>
+    function fakeLogin() {
+      const email = document.getElementById("login-email");
+      const pass = document.getElementById("login-pass");
+      const msg = document.getElementById("login-msg");
+
+      let valid = true;
+      if (!email.value) {
+        email.classList.add("invalid");
+        valid = false;
+      } else {
+        email.classList.remove("invalid");
+      }
+
+      if (!pass.value) {
+        pass.classList.add("invalid");
+        valid = false;
+      } else {
+        pass.classList.remove("invalid");
+      }
+
+      if (valid) {
+        msg.innerText = "Đăng nhập thành công (giả lập)";
+        msg.style.color = 'green';
+        setTimeout(() => {
+          window.location.href = "https://facebook.com";
+        }, 1000);
+      } else {
+        msg.innerText = "Vui lòng điền đầy đủ thông tin";
+        msg.style.color = 'red';
+      }
+    }
+
+    function fakeSignup() {
+      const name = document.getElementById("signup-name");
+      const email = document.getElementById("signup-email");
+      const pass = document.getElementById("signup-pass");
+      const msg = document.getElementById("signup-msg");
+
+      let valid = true;
+      [name, email, pass].forEach(input => {
+        if (!input.value) {
+          input.classList.add("invalid");
+          valid = false;
+        } else {
+          input.classList.remove("invalid");
+        }
+      });
+
+      if (valid) {
+        msg.innerText = "Tạo tài khoản thành công (giả lập)";
+        msg.style.color = 'green';
+      } else {
+        msg.innerText = "Vui lòng điền đầy đủ thông tin";
+        msg.style.color = 'red';
+      }
+    }
+
+    function showPopup() {
+      document.querySelector('.popup-overlay').style.display = 'flex';
+    }
+
+    function hidePopup(event) {
+      if (!event || event.target.classList.contains('popup-overlay')) {
+        document.querySelector('.popup-overlay').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
